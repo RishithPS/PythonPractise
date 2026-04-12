@@ -1,0 +1,53 @@
+# ================================================================================
+# INLINE CONDITIONAL EXPRESSION (TERNARY OPERATOR)
+# ----------------------------------------
+# Python allows writing simple if-else logic
+# in a single line.
+#
+# Syntax:
+# value_if_true if condition else value_if_false
+# ================================================================================
+
+
+# ---------------------------------------
+# Standard If-Else (Multi-line)
+# ---------------------------------------
+score = 50
+
+if score >= 90:
+    grade = "A"
+elif score >= 80:
+    grade = "B"
+else:
+    grade = "F"
+
+print(grade) # -> F
+
+# ---------------------------------------
+# Inline Version (Single Line)
+# ---------------------------------------
+# Same logic, written more compactly.
+
+score = 50
+
+grade = "A" if score >= 90 else "B" if score >= 80 else "F"
+
+print(grade) # -> F
+
+
+# Decide user access level.
+is_admin = True
+
+access_level = "Full Access" if is_admin else "Limited Access"
+
+print(access_level) # -> Full Access
+
+
+# Discount Eligibility
+cart_total = 120
+
+discount_status = "Discount Applied" if cart_total >= 100 else "No Discount"
+
+print(discount_status) # -> Discount Applied
+
+
