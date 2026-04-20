@@ -124,6 +124,10 @@ def _problem_md(sec, sub, ch, *, mode):
     return md
 
 
+def _back_to_toc_md():
+    return "[↑ Back to Table of Contents](#toc)"
+
+
 def _cross_link_md(sec, sub, ch, *, mode):
     """Standalone cell rendered AFTER the test cell.
 
@@ -161,7 +165,7 @@ def _test_cell_source(ch):
 
 
 def _toc_md(sections):
-    lines = ["## Table of Contents", ""]
+    lines = ["<a id='toc'></a>", "## Table of Contents", ""]
     for sec in sections:
         lines.append(f"{sec['num']}. [{sec['title']}](#{sec['anchor']})")
         for sub in sec["subtopics"]:
@@ -241,6 +245,7 @@ def build_notebook(sections, projects, *, mode):
                 cells.append(nbf.v4.new_code_cell(_code_cell_source(ch, mode=mode)))
                 cells.append(nbf.v4.new_code_cell(_test_cell_source(ch)))
                 cells.append(nbf.v4.new_markdown_cell(_cross_link_md(sec, sub, ch, mode=mode)))
+            cells.append(nbf.v4.new_markdown_cell(_back_to_toc_md()))
 
     # Projects
     cells.append(nbf.v4.new_markdown_cell(
@@ -269,6 +274,7 @@ def build_notebook(sections, projects, *, mode):
         cells.append(nbf.v4.new_code_cell(_code_cell_source(proj, mode=mode)))
         cells.append(nbf.v4.new_code_cell(_test_cell_source(proj)))
         cells.append(nbf.v4.new_markdown_cell(_cross_link_md(proj_sec, proj_sub, proj_ch, mode=mode)))
+        cells.append(nbf.v4.new_markdown_cell(_back_to_toc_md()))
 
     cells.append(nbf.v4.new_markdown_cell(_reference_md()))
     nb["cells"] = cells
